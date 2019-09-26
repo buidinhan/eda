@@ -56,7 +56,7 @@ def load_michelson():
     """Source: NIST Engineering Handbook of Statistical Methods"""
     url = "https://www.itl.nist.gov/div898/handbook/datasets/MICHELSO.DAT"
     filename = "MICHELSO.DAT"
-    headers = ["light_speed", "air_temperature", "elapsed_day",
+    headers = ["light_speed", "air_temperature", "elapsed_days",
                "am_pm", "data_set"]
 
     return load_dataset(filename, names=headers, skiprows=25,
@@ -69,7 +69,7 @@ def load_weibull():
     url = "https://www.itl.nist.gov/div898/handbook/datasets/RANDWEIB.DAT"
     filename = "RANDWEIB.DAT"
     
-    return load_dataset(filename, names=["Y"], skiprows=25,
+    return load_dataset(filename, names=["y"], skiprows=25,
                         url_to_fetch_if_missing=url)
 
 
