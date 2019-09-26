@@ -153,10 +153,8 @@ import matplotlib.pyplot as plt
 
 from utils import datasets
 from utils.plotting import show_and_save_plot
-from plots.run_sequence_plot import run_sequence_plot
-from plots.lag_plot import lag_plot
-from plots.histogram import histogram
-from plots.probability_plot import probability_plot
+from plots import (run_sequence_plot, lag_plot, histogram,
+                   probability_plot)
 
 
 def four_plot(x_name, data, main_title="4-PLOT", show=True, save=False,
@@ -201,7 +199,7 @@ def test():
     df = datasets.load_beam_deflection()
     four_plot("Deflection", df, run_kws={"title": "Run Sequence Plot"},
               hist_kws={"bins": 20, "title": "Histogram"},
-              prob_kws={"title": "Normality Plot"}, save=True)
+              prob_kws={"title": "Normality Plot"})
 
 
 if __name__ == "__main__":
