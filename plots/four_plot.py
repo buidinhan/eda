@@ -46,7 +46,8 @@ sequence plot in the upper left corner.
 by the histogram in the lower left corner and the normal probability
 plot in the lower right corner. The distribution is non-normal and is a
 U-shaped distribution.
-5. there are several outliers apparent in the lag plot in the upper right corner. 
+5. there are several outliers apparent in the lag plot in the upper right
+corner. 
 
 Definition
 ----------
@@ -74,7 +75,8 @@ Questions
 4. Are the data random?
 5. Is an observation related to an adjacent observation?
 6. If the data are a time series, is is white noise?
-7. If the data are a time series and not white noise, is it sinusoidal, autoregressive, etc.?
+7. If the data are a time series and not white noise, is it sinusoidal,
+autoregressive, etc.?
 8. If the data are non-random, what is a better model?
 9. Does the process follow a normal distribution?
 10. If non-normal, what distribution does the process follow?
