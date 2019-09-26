@@ -72,8 +72,19 @@ def load_weibull():
     return load_dataset(filename, names=["Y"], skiprows=25,
                         url_to_fetch_if_missing=url)
 
+
+def load_beam_deflection():
+    """Source: NIST Engineering Handbook of Statistical Methods"""
+    url = "https://www.itl.nist.gov/div898/handbook/datasets/LEW.DAT"
+    filename = "LEW.DAT"
+
+    return load_dataset(filename, names=["Deflection"], skiprows=25,
+                        url_to_fetch_if_missing=url)
+
     
 # TESTING
 if __name__ == "__main__":
-    df = load_weibull()
+    df = load_beam_deflection()
     print(df.info())
+    print(df.head())
+    print(df.tail())
