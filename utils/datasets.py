@@ -63,8 +63,17 @@ def load_michelson():
                         url_to_fetch_if_missing=url,
                         delim_whitespace=True)
 
+
+def load_weibull():
+    """Source: NIST Engineering Handbook of Statistical Methods"""
+    url = "https://www.itl.nist.gov/div898/handbook/datasets/RANDWEIB.DAT"
+    filename = "RANDWEIB.DAT"
+    
+    return load_dataset(filename, names=["Y"], skiprows=25,
+                        url_to_fetch_if_missing=url)
+
     
 # TESTING
 if __name__ == "__main__":
-    df = load_michelson()
+    df = load_weibull()
     print(df.info())
