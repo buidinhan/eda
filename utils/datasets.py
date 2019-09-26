@@ -23,7 +23,7 @@ def fetch_dataset(url, filename):
 
 def load_dataset(filename, dataset_folder=DATASET_FOLDER, delimiter=",",
                  header=None, names=None, skiprows=None,
-                 url_to_fetch_if_missing=None):
+                 url_to_fetch_if_missing=None, **kwargs):
     
     file_path = os.path.join(dataset_folder, filename)
 
@@ -35,10 +35,10 @@ def load_dataset(filename, dataset_folder=DATASET_FOLDER, delimiter=",",
 
     if names is not None:
         df = pd.read_csv(file_path, delimiter=delimiter, header=None,
-                         skiprows=skiprows, names=names)
+                         skiprows=skiprows, names=names, **kwargs)
     else:
         df = pd.read_csv(file_path, delimiter=delimiter, header=header,
-                         skiprows=skiprows)
+                         skiprows=skiprows, **kwargs)
 
     return df
 
@@ -52,7 +52,19 @@ def load_filter_transmittance():
                         url_to_fetch_if_missing=url)
 
 
+def load_michelson():
+    """Source: NIST Engineering Handbook of Statistical Methods"""
+    url = "https://www.itl.nist.gov/div898/handbook/datasets/MICHELSO.DAT"
+    filename = "MICHELSO.DAT"
+    headers = ["light_speed", "air_temperature", "elapsed_day",
+               "am_pm", "data_set"]
+
+    return load_dataset(filename, names=headers, skiprows=25,
+                        url_to_fetch_if_missing=url,
+                        delim_whitespace=True)
+
+    
 # TESTING
 if __name__ == "__main__":
-    df = load_filter_transmittance()
+    df = load_michelson()
     print(df.info())
