@@ -62,16 +62,16 @@ from utils import datasets
 from utils.plotting import show_and_save_plot
 
 
-def run_sequence_plot(x_name, df, x_label="Index", y_label="Measure",
+def run_sequence_plot(series, x_label="Index", y_label="Measure",
                       title=None, y_lim=None, ax=None, show=True,
                       save=False, **kwargs):
     
-    indices = [i+1 for i in range(len(df))]
+    indices = [i+1 for i in range(len(series))]
     
     if ax is None:
         fig, ax = plt.subplots()
 
-    ax.scatter(indices, df[x_name], **kwargs)
+    ax.plot(indices, series, **kwargs)
     ax.set_xlabel(x_label)
     ax.set_ylabel(y_label)
     ax.set_ylim(y_lim)
@@ -84,8 +84,9 @@ def test():
     df = datasets.load_filter_transmittance()
     y_min = df["transmittance"].min()
     y_max = df["transmittance"].max()
-    run_sequence_plot("transmittance", df, y_label="Transmittance",
-                      y_lim=(y_min-0.0002, y_max+0.0002), c="green")
+    run_sequence_plot(df["transmittance"], y_label="Transmittance",
+                      y_lim=(y_min-0.0002, y_max+0.0002), c="green",
+                      marker="o")
 
     
 if __name__ == "__main__":
