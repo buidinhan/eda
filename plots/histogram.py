@@ -90,7 +90,7 @@ from utils import datasets
 from utils.plotting import show_and_save_plot
 
 
-def histogram(series, bins=10, x_label="Measure", y_label="Count",
+def histogram(series, bins=20, x_label="Measure", y_label="Count",
               title=None, edgecolor="k", ax=None, save=False, show=True,
               **kwargs):
 
@@ -107,4 +107,4 @@ def histogram(series, bins=10, x_label="Measure", y_label="Count",
 
 if __name__ == "__main__":
     df = datasets.load_michelson()
-    histogram(df["light_speed"], bins=20)
+    histogram(df["light_speed"], bins=10)
