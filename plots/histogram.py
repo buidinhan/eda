@@ -127,7 +127,7 @@ def histogram(series, bins=10, x_label="Measure", y_label="Count",
     return mean, std, range_
 
 if __name__ == "__main__":
-    df = datasets.load_head_flow_meter()
+    df = datasets.load_heat_flow_meter()
     histogram(df["calibration_factor"], bins=20,
               x_label="Calibration Factor", plot_pdf=True,
               show_statistics=True)
