@@ -111,7 +111,7 @@ def load_alaska_pipeline():
                         url_to_fetch_if_missing=url,
                         delim_whitespace=True)
 
-def load_head_flow_meter():
+def load_heat_flow_meter():
     """Source: NIST Engineering Handbook of Statistical Methods"""
     url = "https://www.itl.nist.gov/div898/handbook/datasets/ZARR13.DAT"
     filename = url.split("/")[-1]
@@ -123,7 +123,7 @@ def load_head_flow_meter():
     
 # TESTING
 if __name__ == "__main__":
-    df = load_head_flow_meter()
+    df = load_heat_flow_meter()
     print(df.info())
     print(df.head())
     print(df.tail())
