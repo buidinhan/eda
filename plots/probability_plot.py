@@ -108,19 +108,32 @@ from utils.plotting import show_and_save_plot
 
 
 def probability_plot(series, title=None, sparams=(), distribution="norm",
-                     ax=None, save=False, show=True, **kwargs):
+                     ax=None, show_fitting=False, save=False, show=True,
+                     **kwargs):
 
     if ax is None:
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(gridspec_kw={"bottom": 0.2},
+                               figsize=(6, 4))
 
-    probplot(series, sparams=sparams, dist=distribution, fit=True,
-             plot=ax, **kwargs)
+    results = probplot(series, sparams=sparams, dist=distribution,
+                       fit=True, plot=ax, **kwargs)
     ax.set_title(title)
-    
+
+    if show_fitting:
+        slope, intercept, r = results[1]
+        x_label = "Theoretical quantiles\n"
+        x_label += "slope={:.4f}, ".format(slope)
+        x_label += "intercept={:.4f}, ".format(intercept)
+        x_label += "r={:.4f}".format(r)
+
+        ax.set_xlabel(x_label)
+
     show_and_save_plot(save=save, show=show,
                        filename="probability_plot.png")
 
+    return results
+
 
 if __name__ == "__main__":
-    df = datasets.load_weibull()
-    probability_plot(df["y"])
+    df = datasets.load_heat_flow_meter()
+    probability_plot(df["calibration_factor"], show_fitting=True)
