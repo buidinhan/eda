@@ -159,7 +159,7 @@ from plots import (run_sequence_plot, lag_plot, histogram,
                    probability_plot)
 
 
-def four_plot(x_name, data, main_title="4-PLOT", show=True, save=False,
+def four_plot(series, main_title="4-PLOT", show=True, save=False,
               run_kws=None, lag_kws=None, hist_kws=None, prob_kws=None):
 
     fig, axes = plt.subplots(nrows=2, ncols=2,
@@ -174,23 +174,21 @@ def four_plot(x_name, data, main_title="4-PLOT", show=True, save=False,
     
     # Run Sequence Plot
     run_kws = run_kws if run_kws is not None else {}
-    clearance = (data[x_name].max()-data[x_name].min()) * 1/10
-    y_lim = (data[x_name].min()-clearance, data[x_name].max()+clearance)
-    run_sequence_plot(x_name, data, y_label=x_name, y_lim=y_lim,
-                      ax=rsp, show=False, **run_kws)
+    clearance = (max(series)-min(series)) * 1/10
+    y_lim = (min(series)-clearance, max(series)+clearance)
+    run_sequence_plot(series, y_lim=y_lim, ax=rsp, show=False, **run_kws)
 
     # Lag Plot
     lag_kws = lag_kws if lag_kws is not None else {}
-    lag_plot(x_name, data, ax=lag, show=False, **lag_kws)
+    lag_plot(series, ax=lag, show=False, **lag_kws)
     
     # Histogram
     hist_kws = hist_kws if hist_kws is not None else {}
-    histogram(x_name, data, x_label=x_name, ax=hist, show=False,
-              **hist_kws)
+    histogram(series, ax=hist, show=False, **hist_kws)
 
     # Probability Plot
     prob_kws = prob_kws if prob_kws is not None else {}
-    probability_plot(x_name, data, ax=prob, show=False, **prob_kws)
+    probability_plot(series, ax=prob, show=False, **prob_kws)
     
     fig.suptitle(main_title)
     
@@ -199,8 +197,10 @@ def four_plot(x_name, data, main_title="4-PLOT", show=True, save=False,
 
 def test():
     df = datasets.load_beam_deflection()
-    four_plot("Deflection", df, run_kws={"title": "Run Sequence Plot"},
-              hist_kws={"bins": 20, "title": "Histogram"},
+    four_plot(df["Deflection"], run_kws={"title": "Run Sequence Plot",
+                                         "y_label": "Deflection"},
+              hist_kws={"bins": 20, "title": "Histogram",
+                        "x_label": "Deflection"},
               prob_kws={"title": "Normality Plot"})
 
 
