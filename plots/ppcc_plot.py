@@ -144,13 +144,13 @@ from utils import datasets
 from utils.plotting import show_and_save_plot
 
 
-def ppcc_plot(x_name, data, lambda_min=-5, lambda_max=5,
-              dist="tukeylambda", N=100, ax=None, save=False, show=True):
+def ppcc_plot(series, lambda_min=-5, lambda_max=5, dist="tukeylambda",
+              N=100, ax=None, save=False, show=True):
 
     if ax is None:
         fig, ax = plt.subplots()
 
-    svals, ppcc = stats.ppcc_plot(data[x_name], lambda_min, lambda_max,
+    svals, ppcc = stats.ppcc_plot(series, lambda_min, lambda_max,
                                   dist=dist, plot=ax, N=N)
 
     show_and_save_plot(show=show, save=save, filename="ppcc.png")
@@ -162,7 +162,7 @@ def ppcc_plot(x_name, data, lambda_min=-5, lambda_max=5,
 
 if __name__ == "__main__":
     df = datasets.load_normal()
-    _, _, max_c, max_c_l = ppcc_plot("y", df, lambda_min=-2,
+    _, _, max_c, max_c_l = ppcc_plot(df["y"], lambda_min=-2,
                                      lambda_max=2, N=40)
-    print("Estimated max correlation coef. = {:.4f} at {:.4f}".format(
-                                                        max_c, max_c_l))
+    print("Estimated max corr. coef. = {:.3f} at λ = {:.3f}".format(
+                                                     max_c, max_c_l))
