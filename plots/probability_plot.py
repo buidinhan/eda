@@ -107,15 +107,14 @@ from utils import datasets
 from utils.plotting import show_and_save_plot
 
 
-def probability_plot(x_name, data, title=None, sparams=(),
-                     distribution="norm", ax=None, save=False,
-                     show=True, **kwargs):
+def probability_plot(series, title=None, sparams=(), distribution="norm",
+                     ax=None, save=False, show=True, **kwargs):
 
     if ax is None:
         fig, ax = plt.subplots()
 
-    probplot(data[x_name], sparams=sparams, dist=distribution,
-             fit=True, plot=ax, **kwargs)
+    probplot(series, sparams=sparams, dist=distribution, fit=True,
+             plot=ax, **kwargs)
     ax.set_title(title)
     
     show_and_save_plot(save=save, show=show,
@@ -124,4 +123,4 @@ def probability_plot(x_name, data, title=None, sparams=(),
 
 if __name__ == "__main__":
     df = datasets.load_weibull()
-    probability_plot("Y", df)
+    probability_plot(df["y"])
