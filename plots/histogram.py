@@ -102,7 +102,8 @@ def histogram(series, bins=10, x_label="Measure", y_label="Count",
 
     # Histogram
     if ax is None:
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(gridspec_kw={"bottom": 0.2},
+                               figsize=(6, 4))
 
     ax.hist(series, bins=bins, edgecolor=edgecolor, **kwargs)
 
@@ -110,7 +111,7 @@ def histogram(series, bins=10, x_label="Measure", y_label="Count",
         if x_label is None:
             x_label = ""
             
-        x_label += " (mean={:.4f}, std={:.4f}, range={:.4f})".format(
+        x_label += "\n(mean={:.4f}, std={:.4f}, range={:.4f})".format(
                                                     mean, std, range_)
     ax.set_xlabel(x_label)
     ax.set_ylabel(y_label)
