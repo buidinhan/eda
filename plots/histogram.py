@@ -88,23 +88,46 @@ import matplotlib.pyplot as plt
 
 from utils import datasets
 from utils.plotting import show_and_save_plot
+from utils.calculations import normal_pdf
 
 
-def histogram(series, bins=20, x_label="Measure", y_label="Count",
+def histogram(series, bins=10, x_label="Measure", y_label="Count",
               title=None, edgecolor="k", ax=None, save=False, show=True,
-              **kwargs):
+              plot_pdf=False, show_statistics=False, **kwargs):
 
+    # Calculation of Statistics
+    mean = np.mean(series)
+    std = np.std(series, ddof=1)
+    range_ = max(series) - min(series)
+
+    # Histogram
     if ax is None:
         fig, ax = plt.subplots()
 
     ax.hist(series, bins=bins, edgecolor=edgecolor, **kwargs)
+
+    if show_statistics:
+        if x_label is None:
+            x_label = ""
+            
+        x_label += " (mean={:.4f}, std={:.4f}, range={:.4f})".format(
+                                                    mean, std, range_)
     ax.set_xlabel(x_label)
     ax.set_ylabel(y_label)
     ax.set_title(title)
+
+    # PDF Plot
+    if plot_pdf:
+        Xs = np.arange(mean-3*std, mean+3*std, 6*std/100)
+        Ys = normal_pdf(Xs, mean=mean, std=std)
+        ax.plot(Xs, Ys)
     
     show_and_save_plot(save=save, show=show, filename="histogram.png")
 
+    return mean, std, range_
 
 if __name__ == "__main__":
-    df = datasets.load_michelson()
-    histogram(df["light_speed"], bins=10)
+    df = datasets.load_head_flow_meter()
+    histogram(df["calibration_factor"], bins=20,
+              x_label="Calibration Factor", plot_pdf=True,
+              show_statistics=True)
