@@ -51,10 +51,8 @@ from utils import datasets
 from utils.plotting import show_and_save_plot
 
 
-def lag_plot(x_name, df, lag=1, ax=None, x_lim=None, y_lim=None,
+def lag_plot(series, lag=1, ax=None, x_lim=None, y_lim=None,
              title="Lag Plot", show=True, save=False, **kwargs):
-    
-    series = df[x_name]
 
     if ax is None:
         fig, ax = plt.subplots()
@@ -74,7 +72,7 @@ def test():
     y_min = df.iloc[1:, 0].min()
     y_max = df.iloc[1:, 0].max()
     d = 0.0002
-    lag_plot("transmittance", df, x_lim=(x_min-d, x_max+d),
+    lag_plot(df["transmittance"], x_lim=(x_min-d, x_max+d),
              y_lim=(y_min-d, y_max+d), c="green")
 
 
