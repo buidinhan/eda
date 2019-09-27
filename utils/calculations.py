@@ -15,7 +15,7 @@ def box_cox_transformation(x, lambda_):
     the above formula.
     """
     if lambda_ == 0:
-        return np.log(x) / np.log(10)
+        return np.log(x)
     else:
         return (x**lambda_ - 1) / lambda_
 
