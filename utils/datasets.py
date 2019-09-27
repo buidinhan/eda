@@ -81,10 +81,20 @@ def load_beam_deflection():
     return load_dataset(filename, names=["Deflection"], skiprows=25,
                         url_to_fetch_if_missing=url)
 
+
+def load_normal():
+    """Source: NIST Engineering Handbook of Statistical Methods"""
+    url = "https://www.itl.nist.gov/div898/handbook/datasets/NORMAL.DAT"
+    filename = "NORMAL.DAT"
+
+    return load_dataset(filename, names=["y"], skiprows=25,
+                        url_to_fetch_if_missing=url)
+
+
     
 # TESTING
 if __name__ == "__main__":
-    df = load_beam_deflection()
+    df = load_normal()
     print(df.info())
     print(df.head())
     print(df.tail())
