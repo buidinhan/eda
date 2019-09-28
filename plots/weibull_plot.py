@@ -96,8 +96,8 @@ from utils import datasets
 from utils.plotting import show_and_save_plot
 
 
-def weibull_plot(series, title=None, x_label="log((Measure)",
-                 y_label="Weibull Probability", ax=None, show=True,
+def weibull_plot(series, title=None, x_label="Measure",
+                 y_label="Weibull Probability (%)", ax=None, show=True,
                  save=False, **kwargs):
 
     # Calculation of X and Y coordinates and fitting line parameters
@@ -116,8 +116,8 @@ def weibull_plot(series, title=None, x_label="log((Measure)",
     series_for_fitting = 10 ** X_for_fitting
     Y_for_fitting = intercept + slope*X_for_fitting
 
-    shape_parameter = slope / np.log(10)
-    scale_parameter = 10**(-intercept/slope)
+    shape_parameter = slope / np.log(10) # beta
+    scale_parameter = 10**(-intercept/slope) # eta
 
     # Plotting
     if ax is None:
@@ -127,8 +127,8 @@ def weibull_plot(series, title=None, x_label="log((Measure)",
     ax.plot(series_for_fitting, Y_for_fitting)
     ax.set_title(title)
 
-    percentage_ticks = np.array([0.1, 0.5, 1, 5, 10, 20, 30, 40, 50,
-                                 60, 70, 80, 90, 95, 99, 99.9])
+    percentage_ticks = np.array([0.1, 0.5, 1, 5, 10, 20, 30, 40, 50, 60,
+                                 70, 80, 90, 95, 99, 99.9])
     p_ticks = percentage_ticks / 100
     y_ticks = np.log(-np.log(1-p_ticks))
     ax.set_yticks(y_ticks)
@@ -137,10 +137,22 @@ def weibull_plot(series, title=None, x_label="log((Measure)",
     ax.set_ylim((y_ticks[0], y_ticks[-1]))
     
     ax.set_xscale("log")
-    factor = 10**(1/2)
-    ax.set_xlim((min(series)/factor, max(series)*factor))
-    x_label += "\nr={:.3f}".format(r)
+    ax.set_xlim((min(series)/10**1.5, max(series)*10**0.5))
+    x_label += "\nr={:.3f}, ".format(r)
+    x_label += "slope={:.3f}, ".format(slope)
+    x_label += "intercept={:.3f}\n".format(intercept)
+    x_label += "shape={:.3f}, ".format(shape_parameter)
+    x_label += "scale={:.3f}".format(scale_parameter)
     ax.set_xlabel(x_label)
+
+    # Horizontal and Vertical Lines
+    ax.axhline(y=0)
+    ax.axvline(x=scale_parameter)
+    ax.annotate("63.2", xy=(0.005, 0.05),
+                xycoords=("axes fraction", "data"))
+    ax.annotate("{:.3f}".format(scale_parameter),
+                xy=(scale_parameter, 0.01),
+                xycoords=("data", "axes fraction"))
     
     show_and_save_plot(show=show, save=save, filename="weibull_plot.png")
 
@@ -149,6 +161,6 @@ def weibull_plot(series, title=None, x_label="log((Measure)",
 
 if __name__ == "__main__":
     df = datasets.load_airplane_glass_failure()
-    _, _, _, shape, scale = weibull_plot(df["y"], x_label="log(y)",
-                                         c="green")
-    print(shape, scale)
+    _, _, _, shape, scale = weibull_plot(df["y"], x_label="y",
+                                         c="green", alpha=0.5)
+    print("beta={}, eta={}".format(shape, scale))
