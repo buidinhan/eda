@@ -1,3 +1,4 @@
+from bootstrap_plot import bootstrap_plot
 from box_cox_linearity_plot import (box_cox_linearity_plot,
                                     box_cox_linearity_set)
 from box_cox_normality_plot import (box_cox_normality_plot,
