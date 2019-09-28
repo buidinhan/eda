@@ -120,10 +120,23 @@ def load_heat_flow_meter():
                         skiprows=25, url_to_fetch_if_missing=url)
 
 
+def load_uniform():
+    """Source: NIST Engineering Handbook of Statistical Methods"""
+    url = "https://www.itl.nist.gov/div898/handbook/datasets/RANDU.DAT"
+    filename = url.split("/")[-1]
+    names = ["C1", "C2", "C3", "C4", "C5"]
+
+    df = load_dataset(filename, names=names, skiprows=25,
+                      url_to_fetch_if_missing=url,
+                      delim_whitespace=True)
+    all_values = df.to_numpy().ravel()
+    
+    return pd.DataFrame(all_values, columns=["y"])
+
     
 # TESTING
 if __name__ == "__main__":
-    df = load_heat_flow_meter()
+    df = load_uniform()
     print(df.info())
     print(df.head())
     print(df.tail())
