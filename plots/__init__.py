@@ -10,3 +10,4 @@ from plots.ppcc_plot import ppcc_plot
 from plots.probability_plot import probability_plot
 from plots.run_sequence_plot import run_sequence_plot
 from scatter_plot import scatter_plot
+from weibull_plot import weibull_plot
