@@ -142,10 +142,23 @@ def load_airplane_glass_failure():
     return load_dataset(filename, names=["y"], skiprows=25,
                         url_to_fetch_if_missing=url)
 
+
+def load_normal_random_numbers():
+    """Source: NIST Engineering Handbook of Statistical Methods"""
+    url = "https://www.itl.nist.gov/div898/handbook/datasets/RANDN.DAT"
+    filename = url.split("/")[-1]
+    names = ["C{}".format(i) for i in range(1, 11)]
+    df = load_dataset(filename, names=names, skiprows=25,
+                      url_to_fetch_if_missing=url,
+                      delim_whitespace=True)
+    all_values = df.to_numpy().ravel()
     
+    return pd.DataFrame(all_values, columns=["y"])
+    
+
 # TESTING
 if __name__ == "__main__":
-    df = load_airplane_glass_failure()
+    df = load_normal_random_numbers()
     print(df.info())
     print(df.head())
     print(df.tail())
