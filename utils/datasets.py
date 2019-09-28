@@ -133,10 +133,19 @@ def load_uniform():
     
     return pd.DataFrame(all_values, columns=["y"])
 
+
+def load_airplane_glass_failure():
+    """Source: NIST Engineering Handbook of Statistical Methods"""
+    url = "https://www.itl.nist.gov/div898/handbook/datasets/FULLER2.DAT"
+    filename = url.split("/")[-1]
+
+    return load_dataset(filename, names=["y"], skiprows=25,
+                        url_to_fetch_if_missing=url)
+
     
 # TESTING
 if __name__ == "__main__":
-    df = load_uniform()
+    df = load_airplane_glass_failure()
     print(df.info())
     print(df.head())
     print(df.tail())
