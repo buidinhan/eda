@@ -194,6 +194,7 @@ def autocorrelation_plot(series, max_lag=None, title=None, ax=None,
             for lag in lags])
         ax.plot(lags, confidence_99, c="k")
         ax.plot(lags, confidence_95, c="k")
+        ax.axhline(y=0, c="k")
         ax.plot(lags, -confidence_95, c="k")
         ax.plot(lags, -confidence_99, c="k")
     else:
@@ -201,6 +202,7 @@ def autocorrelation_plot(series, max_lag=None, title=None, ax=None,
         confidence_99 = z_99 / np.sqrt(N)
         ax.axhline(y=confidence_99)
         ax.axhline(y=confidence_95)
+        ax.axhline(y=0, c="k")
         ax.axhline(y=-confidence_95)
         ax.axhline(y=-confidence_99)
 
