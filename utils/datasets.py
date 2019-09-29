@@ -163,11 +163,20 @@ def load_flicker_noise():
 
     return load_dataset(filename, names=["y"], skiprows=25,
                         url_to_fetch_if_missing=url)
-    
+
+
+def load_random_walk():
+    """Source: NIST Engineering Handbook of Statistical Methods"""
+    url = "https://www.itl.nist.gov/div898/handbook/datasets/RANDWALK.DAT"
+    filename = url.split("/")[-1]
+
+    return load_dataset(filename, names=["y"], skiprows=25,
+                        url_to_fetch_if_missing=url)
+
 
 # TESTING
 if __name__ == "__main__":
-    df = load_flicker_noise()
+    df = load_random_walk()
     print(df.info())
     print(df.head())
     print(df.tail())
