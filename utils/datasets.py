@@ -154,11 +154,20 @@ def load_normal_random_numbers():
     all_values = df.to_numpy().ravel()
     
     return pd.DataFrame(all_values, columns=["y"])
+
+
+def load_flicker_noise():
+    """Source: NIST Engineering Handbook of Statistical Methods"""
+    url = "https://www.itl.nist.gov/div898/handbook/datasets/FLICKER.DAT"
+    filename = url.split("/")[-1]
+
+    return load_dataset(filename, names=["y"], skiprows=25,
+                        url_to_fetch_if_missing=url)
     
 
 # TESTING
 if __name__ == "__main__":
-    df = load_normal_random_numbers()
+    df = load_flicker_noise()
     print(df.info())
     print(df.head())
     print(df.tail())
