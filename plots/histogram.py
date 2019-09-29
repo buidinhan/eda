@@ -121,7 +121,9 @@ def histogram(series, bins=10, x_label="Measure", y_label="Count",
     if plot_pdf:
         Xs = np.arange(mean-3*std, mean+3*std, 6*std/100)
         Ys = normal_pdf(Xs, mean=mean, std=std)
-        ax.plot(Xs, Ys)
+        ax1 = ax.twinx()
+        ax1.plot(Xs, Ys)
+        ax1.axis("off")
     
     show_and_save_plot(save=save, show=show, filename="histogram.png")
 
