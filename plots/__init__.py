@@ -1,4 +1,5 @@
 from plots.autocorrelation_plot import autocorrelation_plot
+from bihistogram import bihistogram
 from plots.bootstrap_plot import bootstrap_plot
 from plots.box_cox_linearity_plot import (box_cox_linearity_plot,
                                           box_cox_linearity_set)
