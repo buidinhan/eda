@@ -11,6 +11,7 @@ from plots.histogram import histogram
 from plots.lag_plot import lag_plot
 from plots.ppcc_plot import ppcc_plot
 from plots.probability_plot import probability_plot
+from plots.qq_plot import qq_plot
 from plots.run_sequence_plot import run_sequence_plot
 from plots.scatter_plot import scatter_plot
 from plots.weibull_plot import weibull_plot
