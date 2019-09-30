@@ -98,3 +98,29 @@ Related Techniques
 * Mean Plot
 * Analysis of Variance
 """
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+from utils import datasets
+from utils.plotting import show_and_save_plot
+
+
+def box_plot(df, column=None, group=None, x_label=None, y_label=None,
+             ax=None, show=True, save=False, **kwargs):
+
+    if ax is None:
+        fig, ax = plt.subplots()
+
+    df.boxplot(column=column, by=group, ax=ax, **kwargs)
+    ax.set_xlabel(x_label)
+    ax.set_ylabel(y_label)
+
+    show_and_save_plot(show=show, save=save, filename="box_plot.png")
+
+
+if __name__ == "__main__":
+    df = datasets.load_notch_testing()
+    box_plot(df, column="Energy", group="Machine", x_label="Machine",
+             y_label="Energy", grid=False)
