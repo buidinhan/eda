@@ -209,9 +209,18 @@ def load_notch_testing():
                         delim_whitespace=True)
 
 
+def load_fatigue_life():
+    """Source: NIST Engineering Handbook of Statistical Methods"""
+    url = "https://www.itl.nist.gov/div898/handbook/datasets/BIRNSAUN.DAT"
+    filename = url.split("/")[-1]
+
+    return load_dataset(filename, names=["y"], skiprows=25,
+                        url_to_fetch_if_missing=url)
+
+
 # TESTING
 if __name__ == "__main__":
-    df = load_notch_testing()
+    df = load_fatigue_life()
     print(df.info())
     print(df.head())
     print(df.tail())
