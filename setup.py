@@ -14,10 +14,10 @@ __desc__ = "A collection of tools for Exploratory Data Analysis"
 __author_email__ = "buidinhan@live.com"
 __license__ = "BSD"
 __url__ = "https://github.com/buidinhan/eda"
-__requires__ = ["numpy",
-                "pandas",
-                "matplotlib",
-                "scipy",
+__requires__ = ["numpy>=1.17.0",
+                "pandas>=0.25.0",
+                "matplotlib>=3.1.1",
+                "scipy>=1.3.1",
                 "statsmodels>=0.10.1"
 ]
 __extras_require__= {
