@@ -187,9 +187,31 @@ def load_josephson_junction_cryothermometry():
     return pd.DataFrame(all_values, columns=["y"])
 
 
+def load_ceramic_strength():
+    """Source: NIST Engineering Handbook of Statistical Methods"""
+    url = "https://www.itl.nist.gov/div898/handbook/datasets/JAHANMI2.DAT"
+    filename = url.split("/")[-1]
+    names = ["Run", "Lab", "Bar ID", "Test", "Y", "X1", "X2", "X3", "X4",
+             "Treatment", "Set", "Llab", "Rep", "Batch", "Sblab", "Set2"]
+    
+    return load_dataset(filename, names=names, skiprows=50,
+                        url_to_fetch_if_missing=url,
+                        delim_whitespace=True)
+
+
+def load_notch_testing():
+    """Source: NIST Engineering Handbook of Statistical Methods"""
+    url = "https://www.itl.nist.gov/div898/handbook/datasets/SPLETT2.DAT"
+    filename = url.split("/")[-1]
+    
+    return load_dataset(filename, names=["Energy", "Machine"],
+                        skiprows=25, url_to_fetch_if_missing=url,
+                        delim_whitespace=True)
+
+
 # TESTING
 if __name__ == "__main__":
-    df = load_josephson_junction_cryothermometry()
+    df = load_notch_testing()
     print(df.info())
     print(df.head())
     print(df.tail())
