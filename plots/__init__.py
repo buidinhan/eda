@@ -4,6 +4,7 @@ from plots.box_cox_linearity_plot import (box_cox_linearity_plot,
                                           box_cox_linearity_set)
 from plots.box_cox_normality_plot import (box_cox_normality_plot,
                                           box_cox_normality_set)
+from plots.box_plot import box_plot
 from plots.four_plot import four_plot
 from plots.histogram import histogram
 from plots.lag_plot import lag_plot
