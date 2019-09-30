@@ -80,7 +80,7 @@ autoregressive, etc.?
 8. If the data are non-random, what is a better model?
 9. Does the process follow a normal distribution?
 10. If non-normal, what distribution does the process follow?
-11. Is the model Yi = A0 + Eivalid and sufficient?
+11. Is the model Yi = A0 + Ei valid and sufficient?
 12. If the default model is insufficient, what is a better model?
 13. Is the formula s[Y-bar] = s/√N valid?
 14. Is the sample mean a good estimator of the process location?
