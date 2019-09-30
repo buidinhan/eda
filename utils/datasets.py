@@ -174,9 +174,22 @@ def load_random_walk():
                         url_to_fetch_if_missing=url)
 
 
+def load_josephson_junction_cryothermometry():
+    """Source: NIST Engineering Handbook of Statistical Methods"""
+    url = "https://www.itl.nist.gov/div898/handbook/datasets/SOULEN.DAT"
+    filename = url.split("/")[-1]
+    names = ["C{}".format(i) for i in range(1, 6)]
+    df = load_dataset(filename, names=names, skiprows=25,
+                      url_to_fetch_if_missing=url,
+                      delim_whitespace=True)
+    all_values = df.to_numpy().ravel()
+    
+    return pd.DataFrame(all_values, columns=["y"])
+
+
 # TESTING
 if __name__ == "__main__":
-    df = load_random_walk()
+    df = load_josephson_junction_cryothermometry()
     print(df.info())
     print(df.head())
     print(df.tail())
