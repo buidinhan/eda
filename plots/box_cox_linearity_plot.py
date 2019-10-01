@@ -1,10 +1,10 @@
 """
-Source
-------
+BOX-COX LINEARITY PLOT
+
+## Source
 https://www.itl.nist.gov/div898/handbook/eda/section3/boxcoxli.htm
 
-Purpose
--------
+## Purpose
 Find the transformation of the X variable that maximizes the correlation
 between a Y and an X variable
 
@@ -27,41 +27,23 @@ applied to Y can be used as the basis for meeting the error assumptions.
 That case is not covered here. See page 225 of (Draper and Smith, 1981)
 or page 77 of (Ryan, 1997) for a discussion of this case.
 
-Sample Plot
------------
-The plot of the original data with the predicted values from a linear
-fit indicate that a quadratic fit might be preferable. The Box-Cox
-linearity plot shows a value of λ = 2.0. The plot of the transformed
-data with the predicted values from a linear fit with the transformed
-data shows a better fit (verified by the significant reduction in the
-residual standard deviation).
-
-Definition
-----------
+## Definition
 Box-Cox linearity plots are formed by
 * Vertical axis: Correlation coefficient from the transformed X and Y
 * Horizontal axis: Value for λ 
 
-Questions
----------
+## Questions
 The Box-Cox linearity plot can provide answers to the following questions:
 1. Would a suitable transformation improve my fit?
 2. What is the optimal value of the transformation parameter?
 
-Importance
-----------
+## Importance
 Find a suitable transformation
 
 Transformations can often significantly improve a fit. The Box-Cox
 linearity plot provides a convenient way to find a suitable
 transformation without engaging in a lot of trial and error fitting.
-
-Related Techniques
-------------------
-* Linear Regression
-* Box-Cox Normality Plot
 """
-
 
 
 import pandas as pd
