@@ -1,10 +1,10 @@
 """
-Source
-------
+WEIBULL PLOT
+
+## Source
 https://www.itl.nist.gov/div898/handbook/eda/section3/weibplot.htm
 
-Purpose
--------
+## Purpose
 Graphical Check To See If Data Come From a Population That Would Be Fit
 by a Weibull Distribution
 
@@ -28,9 +28,8 @@ The plot shows a horizontal line at this 63.2% point and a vertical line
 where the horizontal line intersects the least squares fitted line. This
 vertical line shows the value of scale parameter.
 
-Sample Plot
------------
-This Weibull plot of the FULLER2.DAT data set shows that:
+## Sample Plot
+The Weibull plot of the FULLER2.DAT data set shows that:
 1. the assumption of a Weibull distribution is reasonable;
 2. the scale parameter estimate is computed to be 33.32;
 3. the shape parameter estimate is computed to be 5.28; and
@@ -39,8 +38,7 @@ This Weibull plot of the FULLER2.DAT data set shows that:
 Note that the values on the x-axis (0, 1, and 2) are the exponents.
 These actually denote the value 10^0 = 1, 10^1 = 10, and 10^2 = 100.
 
-Definition
-----------
+## Definition
 Weibull Cumulative Probability Versus LN(Ordered Response)
 
 The Weibull plot is formed by:
@@ -51,8 +49,7 @@ The vertical scale is ln(-ln(1-p)) where p=(i-0.3)/(n+0.4) and i is the
 rank of the observation. This scale is chosen in order to linearize the
 resulting plot for Weibull data.
 
-Questions
----------
+## Questions
 The Weibull plot can be used to answer the following questions:
 1. Do the data follow a 2-parameter Weibull distribution?
 2. What is the best estimate of the shape parameter for the 2-parameter
@@ -60,8 +57,7 @@ Weibull distribution?
 3. What is the best estimate of the scale (= variation) parameter for
 the 2-parameter Weibull distribution? 
 
-Importance
-----------
+## Importance
 Check Distributional Assumptions
 
 Many statistical analyses, particularly in the field of reliability, are
@@ -70,8 +66,7 @@ the analysis assumes the data follow a Weibull distribution, it is
 important to verify this assumption and, if verified, find good estimates
 of the Weibull parameters.
 
-Related Techniques
-------------------
+## Related Techniques
 * Weibull Probability Plot
 * Weibull PPCC Plot
 * Weibull Hazard Plot
