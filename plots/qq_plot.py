@@ -1,4 +1,6 @@
 """
+Q-Q PLOT
+
 ## Source
 https://www.itl.nist.gov/div898/handbook/eda/section3/qqplot.htm
 
@@ -32,15 +34,6 @@ either up or down from the 45-degree reference line.
 The q-q plot is similar to a probability plot. For a probability plot,
 the quantiles for one of the data samples are replaced with the quantiles
 of a theoretical distribution.
-
-## Sample Plot
-This q-q plot of the JAHANMI2.DAT data set shows that
-1. These 2 batches do not appear to have come from populations with a
-common distribution.
-2. The batch 1 values are significantly higher than the corresponding
-batch 2 values.
-3. The differences are increasing from values 525 to 625. Then the values
-for the 2 batches get closer again. 
 
 ## Definition:
 Quantiles for Data Set 1 Versus Quantiles of Data Set 2
@@ -77,13 +70,6 @@ common location and scale. If two samples do differ, it is also useful
 to gain some understanding of the differences. The q-q plot can provide
 more insight into the nature of the difference than analytical methods
 such as the chi-square and Kolmogorov-Smirnov 2-sample tests.
-
-## Related Techniques
-* Bihistogram
-* T Test
-* F Test
-* 2-Sample Chi-Square Test
-* 2-Sample Kolmogorov-Smirnov Test
 """
 
 
