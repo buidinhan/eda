@@ -109,19 +109,20 @@ from utils.plotting import show_and_save_plot
 
 
 def doe_scatter_plot(df, response, factors, x_labels=None,
-                     y_label="Response", title=None, figure_size=(8, 6),
+                     y_label="Response", title=None,
+                     show_overall_mean=False, figure_size=(8, 6),
                      show=True, save=False, **kwargs):
 
-    overall_mean = df[response].mean()
-    
     fig, axes = plt.subplots(nrows=1, ncols=len(factors),
                              sharey=True, figsize=figure_size,
                              gridspec_kw={"left": 0.1, "right": 0.95,
                                           "bottom": 0.1, "top": 0.95,
                                           "wspace": 0,})
-
+    overall_mean = df[response].mean()
+    
     for factor, ax in zip(factors, axes):
-        ax.axhline(y=overall_mean)
+        if show_overall_mean:
+            ax.axhline(y=overall_mean)
         
         factor_levels = np.sort(df[factor].unique())
 
@@ -220,7 +221,8 @@ def doe_scatter_matrix(df, response, factors, y_label="Response",
 def test_doe_scatter_plot():
     df = datasets.load_tire_speed_effect()
     doe_scatter_plot(df, "Y", ["X1", "X2", "X3", "X4", "X5"],
-                     figure_size=(6, 6), marker="*", color="g")
+                     show_overall_mean=True, figure_size=(6, 6),
+                     marker="*", color="g")
 
 
 def test_doe_scatter_matrix():
