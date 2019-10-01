@@ -1,18 +1,19 @@
 """
-Source
-------
+LAG PLOT
+
+## Source
 https://www.itl.nist.gov/div898/handbook/eda/section3/lagplot.htm
 
-Purpose: Check for randomness
------------------------------
+## Purpose
+Check for randomness
+
 A lag plot checks whether a data set or time series is random or not.
 Random data should not exhibit any identifiable structure in the lag
 plot. Non-random structure in the lag plot indicates that the underlying
 data are not random. Several common patterns for lag plots are shown in
 the examples below.
 
-Definition
-----------
+## Definition
 A lag is a fixed time displacement. For example, given a data set Y1,
 Y2 ..., Yn, Y2 and Y7 have lag 5 since 7 - 2 = 5. Lag plots can be
 generated for any arbitrary lag, although the most commonly used lag is
@@ -22,25 +23,17 @@ A plot of lag 1 is a plot of the values of Yi versus Y[i-1]
 * Vertical axis: Yi for all i
 * Horizontal axis: Y[i-1] for all i
 
-Questions
----------
+## Questions
 Lag plots can provide answers to the following questions:
 1. Are the data random?
 2. Is there serial correlation in the data?
 3. What is a suitable model for the data?
 4. Are there outliers in the data?
 
-Importance
-----------
+## Importance
 Inasmuch as randomness is an underlying assumption for most statistical
 estimation and testing techniques, the lag plot should be a routine tool
 for researchers.
-
-Related Techniques
-------------------
-* Autocorrelation Plot
-* Spectrum
-* Runs Test
 """
 
 
