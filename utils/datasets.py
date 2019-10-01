@@ -229,9 +229,21 @@ def load_lead_wire_weld():
                         delim_whitespace=True)
 
 
+def load_tire_speed_effect():
+    """Source: NIST Engineering Handbook of Statistical Methods"""
+    url = "https://www.itl.nist.gov/div898/handbook/datasets/BOXBIKE2.DAT"
+    filename = url.split("/")[-1]
+    names = ["Y", "X1", "X2", "X3", "X4", "X5", "X6", "X7"]
+    
+    return load_dataset(filename, names=names, skiprows=25,
+                        url_to_fetch_if_missing=url,
+                        delim_whitespace=True)
+
+
+
 # TESTING
 if __name__ == "__main__":
-    df = load_lead_wire_weld()
+    df = load_tire_speed_effect()
     print(df.info())
     print(df.head())
     print(df.tail())
