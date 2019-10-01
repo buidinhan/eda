@@ -26,7 +26,8 @@ From a binomial point of view, weld method is statistically significant.
 ## Definition
 Block Plots are formed as follows:
 * Vertical axis: Response variable Y
-* Horizontal axis: All combinations of all levels of all nuisance (secondary) factors X1, X2, ...
+* Horizontal axis: All combinations of all levels of all nuisance
+(secondary) factors X1, X2, ...
 * Plot Character: Levels of the primary factor XP
 
 ## Discussion
@@ -128,7 +129,6 @@ exactly 2 levels).
 
 
 import itertools
-from pprint import pprint
 
 import pandas as pd
 import numpy as np
@@ -139,8 +139,9 @@ from utils.plotting import show_and_save_plot
 
 
 def block_plot(df, response_name, plot_factor, grouping_factors,
-               x_label="Combination", y_label="Average Response",
-               title=None, ax=None, show=True, save=False, **kwargs):
+               x_label=None, y_label=None, plot_factor_label=None,
+               title=None, ax=None, figure_size=(6, 6), show=True,
+               save=False):
 
     # Levels of the plot factor
     plot_levels = np.sort(df[plot_factor].unique())
@@ -150,7 +151,9 @@ def block_plot(df, response_name, plot_factor, grouping_factors,
     for factor in grouping_factors:
         levels_by_factor[factor] = np.sort(df[factor].unique())
 
-    combinations = list(itertools.product(*levels_by_factor.values()))
+    # Combinations = Levels_of_Factor_1 x Levels_of_Factor_2 x ...
+    # (Cartesian product)
+    combinations = list(itertools.product(*(levels_by_factor.values())))
 
     # Calculating response means grouped by all factors
     groups = df[[response_name,
@@ -166,26 +169,81 @@ def block_plot(df, response_name, plot_factor, grouping_factors,
         for plot_level in plot_levels:
             response_means_by_combination[combination][plot_level] = \
                 grouped_response_means.loc[(*combination, plot_level),
-                                           "Defects"]
-
-    pprint(response_means_by_combination)
+                                           response_name]
 
     # Plotting
     if ax is None:
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(gridspec_kw={"bottom": 0.15, "top": 0.95,
+                                            "left": 0.1, "right": 0.96},
+                               figsize=figure_size)
 
     for index, combination in enumerate(combinations):
         lo = min(response_means_by_combination[combination].values())
         hi = max(response_means_by_combination[combination].values())
-        ax.bar(index+1, hi-lo, width=0.5, bottom=lo, align="center",
-               **kwargs)
+        ax.bar(index, hi-lo, width=0.5, bottom=lo, align="center",
+               edgecolor="k", color="w")
         
         for plot_level in plot_levels:
-            # Marker for each plot_level
+            mean_at_this_level = \
+                response_means_by_combination[combination][plot_level]
+
+            if mean_at_this_level not in (lo, hi):
+                ax.plot([index], [mean_at_this_level], marker="^",
+                        color="k")
+
+            ax.annotate(str(plot_level),
+                        xy=(index, mean_at_this_level),
+                        xycoords="data",
+                        xytext=(-2, 1),
+                        textcoords="offset points")
+
+    if plot_factor_label is not None:
+        plot_factor_label = "Plot Character = " + plot_factor_label
+        ax.annotate(plot_factor_label,
+                    xy=(0.01, 0.97),
+                    xycoords="axes fraction")
+
+    x_ticks = [index for index in range(len(combinations))]
+    ax.set_xticks(x_ticks)
+
+    if len(grouping_factors) > 1:
+        x_tick_labels = [str(combination) for combination in
+                         combinations]
+        ax.set_xticklabels(x_tick_labels, rotation=60)
+    else:
+        x_tick_labels = [str(combination[0]) for combination in
+                         combinations]
+        ax.set_xticklabels(x_tick_labels)
+        
+    if x_label is None:
+        if len(grouping_factors) > 1:
+            x_label = "(" + ", ".join(grouping_factors) + ")"
+        else:
+            x_label = grouping_factors[0]
+
+    if y_label is None:
+        y_label = "Average Response"
+
+    ax.set_title(title)
+    ax.set_xlabel(x_label)
+    ax.set_ylabel(y_label)
+
+    show_and_save_plot(show=show, save=save, filename="block_plot.png")
             
-            
+
+def test_1():
+    df = datasets.load_lead_wire_weld()    
+    block_plot(df, "Defects", "Weld", ["Plant", "Speed", "Shift"],
+               title="Block Plot", x_label="Plant(2) x Speed(2) x Shift(3)",
+               y_label="Average Detects per Hour",
+               plot_factor_label="Weld Method(2)")
+
+
+def test_2():
+    df = datasets.load_ceramic_strength()
+    block_plot(df, "Y", "Batch", ["Lab"])
 
 
 if __name__ == "__main__":
-    df = datasets.load_lead_wire_weld()    
-    block_plot(df, "Defects", "Weld", ["Plant", "Speed", "Shift"])
+    test_1()
+    test_2()
