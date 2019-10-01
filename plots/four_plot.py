@@ -1,10 +1,10 @@
 """
-Source
-------
+4-PLOT
+
+## Source
 https://www.itl.nist.gov/div898/handbook/eda/section3/4plot.htm
 
-Purpose
--------
+## Purpose
 Check Underlying Statistical Assumptions
 
 The 4-plot is a collection of 4 specific EDA graphical techniques whose
@@ -30,27 +30,7 @@ the assumptions on the underlying error term are still the same. The
 4-plot can and should be routinely applied to the residuals when fitting
 models regardless of whether the model is simple or complicated.
 
-Sample Plot
------------
-Process Has Fixed Location, Fixed Variation, Non-Random (Oscillatory),
-Non-Normal U-Shaped Distribution, and Has 3 Outliers.
-
-This 4-plot of the LEW.DAT data set reveals the following:
-1. the fixed location assumption is justified as shown by the run
-sequence plot in the upper left corner.
-2. the fixed variation assumption is justified as shown by the run
-sequence plot in the upper left corner.
-3. the randomness assumption is violated as shown by the non-random
-(oscillatory) lag plot in the upper right corner.
-4. the assumption of a common, normal distribution is violated as shown
-by the histogram in the lower left corner and the normal probability
-plot in the lower right corner. The distribution is non-normal and is a
-U-shaped distribution.
-5. there are several outliers apparent in the lag plot in the upper right
-corner. 
-
-Definition
-----------
+## Definition
 The 4-plot consists of the following:
 1. Run sequence plot to test fixed location and variation.
 * Vertically: Yi
@@ -66,8 +46,7 @@ The 4-plot consists of the following:
 * Horizontally: Theoretical values from a normal N(0,1) distribution
 for ordered Yi 
 
-Questions
----------
+## Questions
 4-plots can provide answers to many questions:
 1. Is the process in-control, stable, and predictable?
 2. Is the process drifting with respect to location?
@@ -87,8 +66,7 @@ autoregressive, etc.?
 15. If not, what would be a better estimator?
 16. Are there any outliers? 
 
-Importance
-----------
+## Importance
 Testing Underlying Assumptions Helps Ensure the Validity of the Final
 Scientific and Engineering Conclusions
 
@@ -119,8 +97,7 @@ sequence plot, lag plot, histogram, and normal probability plot) is seen
 as a simple, efficient, and powerful way of carrying out this routine
 checking.
 
-Interpretation
---------------
+## Interpretation
 Flat, Equi-Banded, Random, Bell-Shaped, and Linear
 
 Of the 4 underlying assumptions:
@@ -137,15 +114,6 @@ bell-shaped and the normal probability plot will be approximately linear.
 
 If all 4 of the assumptions hold, then the process is "statistically in
 control". In practice, many processes fall short of achieving this ideal.
-
-Related Techniques
-* Run Sequence Plot
-* Lag Plot
-* Histogram
-* Normal Probability Plot
-* Autocorrelation Plot
-* Spectral Plot
-* PPCC Plot
 """
 
 
