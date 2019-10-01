@@ -1,10 +1,12 @@
 """
-Source
-------
+HISTOGRAM
+
+## Source
 https://www.itl.nist.gov/div898/handbook/eda/section3/histogra.htm
 
-Purpose: Summarize a Univariate Data Set
-----------------------------------------
+## Purpose
+Summarize a Univariate Data Set
+
 The purpose of a histogram (Chambers) is to graphically summarize the
 distribution of a univariate data set. The histogram graphically shows
 the following:
@@ -18,11 +20,7 @@ These features provide strong indications of the proper distributional
 model for the data. The probability plot or a goodness-of-fit test can
 be used to verify the distributional model.
 
-The examples section shows the appearance of a number of common features
-revealed by histograms.
-
-Definition
-----------
+## Definition
 The most common form of the histogram is obtained by splitting the range
 of the data into equal-sized bins (called classes). Then for each bin,
 the number of points from the data set that fall into each bin are
@@ -63,22 +61,13 @@ greater than 1 are quite permissible), it is the appropriate
 normalization if you are using the histogram to model a probability
 density function.
 
-Questions
----------
+## Questions
 The histogram can be used to answer the following questions:
 1. What kind of population distribution do the data come from?
 2. Where are the data located?
 3. How spread out are the data?
 4. Are the data symmetric or skewed?
 5. Are there outliers in the data?
-
-Related Techniques
-------------------
-* Box plot
-* Probability plot
-* Frequency Plot
-* Stem and Leaf Plot
-* Density Trace
 """
 
 
