@@ -1,10 +1,10 @@
 """
-Source
-------
+PPCC PLOT
+
+## Source
 https://www.itl.nist.gov/div898/handbook/eda/section3/ppccplot.htm
 
-Purpose
--------
+## Purpose
 Graphical Technique for Finding the Shape Parameter of a Distributional
 Family that Best Fits a Data Set
 
@@ -30,8 +30,7 @@ The probability plot is then generated to find estimates of the location
 and scale parameters and in addition to provide a graphical assessment
 of the adequacy of the distributional fit.
 
-Compare Distributions
----------------------
+## Compare Distributions
 In addition to finding a good choice for estimating the shape parameter
 of a given distribution, the PPCC plot can be useful in deciding which
 distributional family is most appropriate. For example, given a set of
@@ -45,9 +44,8 @@ the maximum PPCC value for the Weibull is 0.99 and only 0.94 for the
 lognormal, then we could reasonably conclude that the Weibull family is
 the better choice.
 
-Tukey-Lambda PPCC Plot for Symmetric Distributions
---------------------------------------------------
-The Tukey Lambda PPCC plot, with shape parameter λ, is particularly
+## Tukey-Lambda PPCC Plot for Symmetric Distributions
+The Tukey-Lambda PPCC plot, with shape parameter λ, is particularly
 useful for symmetric distributions. It indicates whether a distribution
 is short or long tailed and it can further indicate several common
 distributions. Specifically,
@@ -57,7 +55,7 @@ distributions. Specifically,
 4. λ = 0.5: distribution is U-shaped
 5. λ = 1: distribution is exactly uniform
 
-If the Tukey Lambda PPCC plot gives a maximum value near 0.14, we can
+If the Tukey-Lambda PPCC plot gives a maximum value near 0.14, we can
 reasonably conclude that the normal distribution is a good model for the
 data. If the maximum value is less than 0.14, a long-tailed distribution
 such as the double exponential or logistic would be a better choice. If
@@ -70,8 +68,7 @@ The Tukey-Lambda PPCC plot is used to suggest an appropriate distribution.
 You should follow-up with PPCC and probability plots of the appropriate
 alternatives.
 
-Use Judgement When Selecting An Appropriate Distributional Family
------------------------------------------------------------------
+## Use Judgement When Selecting An Appropriate Distributional Family
 When comparing distributional models, do not simply choose the one with
 the maximum PPCC value. In many cases, several distributional fits
 provide comparable PPCC values. For example, a lognormal and Weibull may
@@ -86,27 +83,12 @@ optimal, only that it is adequate for our purposes. That is, we may be
 able to use techniques designed for normally distributed data even if
 other distributions fit the data somewhat better.
 
-Sample Plot
------------
-The following is a PPCC plot of 100 normal random numbers. The maximum
-value of the correlation coefficient = 0.997 at λ = 0.099.
-
-This PPCC plot shows that:
-1. the best-fit symmetric distribution is nearly normal;
-2. the data are not long tailed;
-3. the sample mean would be an appropriate estimator of location.
-
-We can follow-up this PPCC plot with a normal probability plot to verify
-the normality model for the data.
-
-Definition
-----------
+## Definition
 The PPCC plot is formed by:
 * Vertical axis: Probability plot correlation coefficient;
 * Horizontal axis: Value of shape parameter.
 
-Questions
----------
+## Questions
 The PPCC plot answers the following questions:
 1. What is the best-fit member within a distributional family?
 2. Does the best-fit member provide a good fit (in terms of generating a
@@ -115,8 +97,7 @@ probability plot with a high correlation coefficient)?
 distributions?
 4. How sensitive is the choice of the shape parameter?
 
-Importance
-----------
+## Importance
 Many statistical analyses are based on distributional assumptions about
 the population from which the data have been obtained. However,
 distributional families can have radically different shapes depending on
@@ -125,13 +106,6 @@ for the shape parameter is a necessary step in the analysis. In many
 analyses, finding a good distributional model for the data is the
 primary focus of the analysis. In both of these cases, the PPCC plot is
 a valuable tool.
-
-Related Techniques
-------------------
-* Probability Plot
-* Maximum Likelihood Estimation
-* Least Squares Estimation
-* Method of Moments Estimation
 """
 
 
