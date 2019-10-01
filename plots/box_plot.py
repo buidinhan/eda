@@ -1,10 +1,10 @@
 """
-Source
-------
+BOX PLOT
+
+## Source
 https://www.itl.nist.gov/div898/handbook/eda/section3/boxplot.htm
 
-Purpose
--------
+## Purpose
 Check location and variation shifts
 
 Box plots (Chambers 1983) are an excellent tool for conveying location
@@ -12,19 +12,7 @@ and variation information in data sets, particularly for detecting and
 illustrating location and variation changes between different groups of
 data.
 
-Sample Plot
------------
-This box plot reveals that machine has a significant effect on energy
-with respect to location and possibly variation.
-
-This box plot, comparing four machines for energy output, shows that
-machine has a significant effect on energy with respect to both location
-and variation. Machine 3 has the highest energy response (about 72.5);
-machine 4 has the least variable energy response with about 50% of its
-readings being within 1 energy unit.
-
-Definition
-----------
+## Definition
 Box plots are formed by
 * Vertical axis: Response variable
 * Horizontal axis: The factor of interest
@@ -42,8 +30,7 @@ drawn at these minimum and maximum points, although this is optional.
 Thus the box plot identifies the middle 50% of the data, the median, and
 the extreme points.
 
-Single or multiple box plots can be drawn
------------------------------------------
+## Single or multiple box plots can be drawn
 A single box plot can be drawn for one batch of data with no distinct
 groups. Alternatively, multiple box plots can be drawn together to
 compare multiple data sets or to compare groups in a single data set.
@@ -52,8 +39,7 @@ box plots, the width of the box plot can be set proportional to the number
 of points in the given group or sample (some software implementations of
 the box plot simply set all the boxes to the same width).
 
-Box plots with fences
----------------------
+## Box plots with fences
 There is a useful variation of the box plot that more specifically
 identifies outliers. To create this variation:
 1. Calculate the median and the lower and upper quartiles.
@@ -74,16 +60,14 @@ largest point smaller than U1.
 circles. Points less than L2 or greater than U2 are drawn as large
 circles.
 
-Questions
----------
+## Questions
 The box plot can provide answers to the following questions:
 1. Is a factor significant?
 2. Does the location differ between subgroups?
 3. Does the variation differ between subgroups?
 4. Are there any outliers?
 
-Importance
-----------
+## Importance
 Check the significance of a factor
 
 The box plot is an important EDA tool for determining if a factor has a
@@ -92,11 +76,6 @@ variation.
 
 The box plot is also an effective tool for summarizing large quantities
 of information.
-
-Related Techniques
-------------------
-* Mean Plot
-* Analysis of Variance
 """
 
 
