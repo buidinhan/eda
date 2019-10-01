@@ -26,28 +26,6 @@ sometimes get lost with the raw plot). However, the raw data points can
 reveal subtleties, such as the presence of outliers, that might get lost
 with the summary statistics.
 
-## Sample Plot
-Factors 4, 2, 3, and 7 are the Important Factors.
-
-## Description of the Plot
-For this sample plot of the BOXBIKE2.DAT data set, there are seven factors
-and each factor has two levels. For each factor, we define a distinct
-x coordinate for each level of the factor. For example, for factor 1,
-level 1 is coded as 0.8 and level 2 is coded as 1.2. The y coordinate is
-simply the value of the response variable. The solid horizontal line is
-drawn at the overall mean of the response variable. The vertical dotted
-lines are added for clarity.
-
-Although the plot can be drawn with an arbitrary number of levels for a
-factor, it is really only useful when there are two or three levels for
-a factor.
-
-## Conclusions
-This sample DOE scatter plot shows that:
-1. there does not appear to be any outliers;
-2. the levels of factors 2 and 4 show distinct location differences; and
-3. the levels of factor 1 show distinct scale differences. 
-
 ## Definition
 Response Values Versus Factor Variables
 
@@ -88,13 +66,6 @@ has two levels) the values are typically coded as -1 and 1, so the
 multiplied values are also -1 and 1. We then generate a DOE scatter plot
 for this interaction variable. This plot is called a DOE interaction
 effects plot.
-
-## Related Techniques
-* DOE mean plot
-* DOE standard deviation plot
-* Block plot
-* Box plot
-* Analysis of variance
 """
 
 
