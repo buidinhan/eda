@@ -218,9 +218,20 @@ def load_fatigue_life():
                         url_to_fetch_if_missing=url)
 
 
+def load_lead_wire_weld():
+    """Source: NIST Engineering Handbook of Statistical Methods"""
+    url = "https://www.itl.nist.gov/div898/handbook/datasets/SHEESLE2.DAT"
+    filename = url.split("/")[-1]
+    names = ["Defects", "Weld", "Plant", "Speed", "Shift", "Tag"]
+    
+    return load_dataset(filename, names=names, skiprows=25,
+                        url_to_fetch_if_missing=url,
+                        delim_whitespace=True)
+
+
 # TESTING
 if __name__ == "__main__":
-    df = load_fatigue_life()
+    df = load_lead_wire_weld()
     print(df.info())
     print(df.head())
     print(df.tail())
