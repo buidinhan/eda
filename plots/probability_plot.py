@@ -1,10 +1,12 @@
 """
-Source
-------
+PROBABILITY PLOT
+
+## Source
 https://www.itl.nist.gov/div898/handbook/eda/section3/probplot.htm
 
-Purpose: Check If Data Follow a Given Distribution
---------------------------------------------------
+## Purpose
+Check If Data Follow a Given Distribution
+
 The probability plot (Chambers et al., 1983) is a graphical technique
 for assessing whether or not a data set follows a given distribution
 such as the normal or Weibull.
@@ -31,8 +33,7 @@ excellent method for estimating the shape parameter.
 We cover the special case of the normal probability plot separately due
 to its importance in many statistical applications.
 
-Definition
-----------
+## Definition
 The probability plot is formed by:
 * Vertical axis: Ordered response values
 * Horizontal axis: Order statistic medians for the given distribution
@@ -65,8 +66,7 @@ this is not too important for the normal distribution (the location
 and scale are estimated by the mean and standard deviation,
 respectively), it can be useful for many other distributions.
 
-Questions
----------
+## Questions
 The probability plot is used to answer the following questions:
 * Does a given distribution, such as the Weibull, provide a good fit to
 my data?
@@ -74,8 +74,7 @@ my data?
 * What are good estimates for the location and scale parameters of the
 chosen distribution?
 
-Importance
-----------
+## Importance
 Check distributional assumption	The discussion for the normal
 probability plot covers the use of probability plots for checking the
 fixed distribution assumption.
@@ -85,16 +84,6 @@ specific type of distribution. For example, in reliability applications,
 the Weibull, lognormal, and exponential are commonly used distributional
 models. Probability plots can be useful for checking this distributional
 assumption.
-
-Related Techniques
-------------------
-* Histogram
-* Probability Plot Correlation Coefficient (PPCC) Plot
-* Hazard Plot
-* Quantile-Quantile Plot
-* Anderson-Darling Goodness of Fit
-* Chi-Square Goodness of Fit
-* Kolmogorov-Smirnov Goodness of Fit
 """
 
 
