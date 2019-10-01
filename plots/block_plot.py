@@ -127,6 +127,9 @@ exactly 2 levels).
 """
 
 
+import itertools
+from pprint import pprint
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -135,9 +138,54 @@ from utils import datasets
 from utils.plotting import show_and_save_plot
 
 
-def block_plot():
-    pass
+def block_plot(df, response_name, plot_factor, grouping_factors,
+               x_label="Combination", y_label="Average Response",
+               title=None, ax=None, show=True, save=False, **kwargs):
+
+    # Levels of the plot factor
+    plot_levels = np.sort(df[plot_factor].unique())
+
+    # Combinations of the grouping factors
+    levels_by_factor = {}
+    for factor in grouping_factors:
+        levels_by_factor[factor] = np.sort(df[factor].unique())
+
+    combinations = list(itertools.product(*levels_by_factor.values()))
+
+    # Calculating response means grouped by all factors
+    groups = df[[response_name,
+                 plot_factor,
+                 *grouping_factors]].groupby([*grouping_factors,
+                                              plot_factor])
+    grouped_response_means = groups.mean()
+
+    # Response means grouped by grouping factors
+    response_means_by_combination = {}
+    for combination in combinations:
+        response_means_by_combination[combination] = {}
+        for plot_level in plot_levels:
+            response_means_by_combination[combination][plot_level] = \
+                grouped_response_means.loc[(*combination, plot_level),
+                                           "Defects"]
+
+    pprint(response_means_by_combination)
+
+    # Plotting
+    if ax is None:
+        fig, ax = plt.subplots()
+
+    for index, combination in enumerate(combinations):
+        lo = min(response_means_by_combination[combination].values())
+        hi = max(response_means_by_combination[combination].values())
+        ax.bar(index+1, hi-lo, width=0.5, bottom=lo, align="center",
+               **kwargs)
+        
+        for plot_level in plot_levels:
+            # Marker for each plot_level
+            
+            
 
 
 if __name__ == "__main__":
-    pass
+    df = datasets.load_lead_wire_weld()    
+    block_plot(df, "Defects", "Weld", ["Plant", "Speed", "Shift"])
