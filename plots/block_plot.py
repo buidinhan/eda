@@ -166,10 +166,13 @@ def block_plot(df, response_name, plot_factor, grouping_factors,
     response_means_by_combination = {}
     for combination in combinations:
         response_means_by_combination[combination] = {}
-        for plot_level in plot_levels:
-            response_means_by_combination[combination][plot_level] = \
-                grouped_response_means.loc[(*combination, plot_level),
-                                           response_name]
+        try:
+            for plot_level in plot_levels:
+                response_means_by_combination[combination][plot_level] = \
+                    grouped_response_means.loc[(*combination, plot_level),
+                                               response_name]
+        except KeyError:
+            continue
 
     # Plotting
     if ax is None:
@@ -178,16 +181,22 @@ def block_plot(df, response_name, plot_factor, grouping_factors,
                                figsize=figure_size)
 
     for index, combination in enumerate(combinations):
-        lo = min(response_means_by_combination[combination].values())
-        hi = max(response_means_by_combination[combination].values())
-        ax.bar(index, hi-lo, width=0.5, bottom=lo, align="center",
+        response_means_for_this_combination = \
+                            response_means_by_combination[combination]
+                                            
+        if len(response_means_for_this_combination) <= 1:
+            continue
+        
+        low = min(response_means_for_this_combination.values())
+        high = max(response_means_for_this_combination.values())
+        ax.bar(index, high-low, width=0.5, bottom=low, align="center",
                edgecolor="k", color="w")
         
-        for plot_level in plot_levels:
+        for plot_level in response_means_for_this_combination.keys():
             mean_at_this_level = \
-                response_means_by_combination[combination][plot_level]
+                response_means_for_this_combination[plot_level]
 
-            if mean_at_this_level not in (lo, hi):
+            if mean_at_this_level not in (low, high):
                 ax.plot([index], [mean_at_this_level], marker="^",
                         color="k")
 
@@ -241,7 +250,7 @@ def test_1():
 
 def test_2():
     df = datasets.load_ceramic_strength()
-    block_plot(df, "Y", "Batch", ["Lab"])
+    block_plot(df, "Y", "Batch", ["Lab", "X1"])
 
 
 if __name__ == "__main__":
