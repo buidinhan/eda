@@ -1,10 +1,10 @@
 """
-Source
-------
+AUTOCORRELATION PLOT
+
+## Source
 https://www.itl.nist.gov/div898/handbook/eda/section3/autocopl.htm
 
-Purpose
--------
+## Purpose
 Check Randomness
 
 Autocorrelation plots (Box and Jenkins, pp. 28-32) are a commonly-used
@@ -17,8 +17,7 @@ autocorrelations will be significantly non-zero.
 In addition, autocorrelation plots are used in the model identification
 stage for Box-Jenkins autoregressive, moving average time series models.
 
-Autocorrelation is Only One Measure of Randomness
--------------------------------------------------
+## Autocorrelation is Only One Measure of Randomness
 Note that uncorrelated does not necessarily mean random. Data that has
 significant autocorrelation is not random. However, data that does not
 show significant autocorrelation can still exhibit non-randomness in
@@ -35,17 +34,7 @@ ways.
 An example of where a more rigorous check for randomness is needed would
 be in testing random number generators.
 
-Sample Plot
------------
-Autocorrelations should be near-zero for randomness. Such is not the
-case in this example and thus the randomness assumption fails.
-
-This sample autocorrelation plot of the FLICKER.DAT data set shows that
-the time series is not random, but rather has a high degree of
-autocorrelation between adjacent and near-adjacent observations.
-
-Definition
-----------
+## Definition
 r(h) versus h
 
 Autocorrelation plots are formed by
@@ -83,8 +72,7 @@ where k is the lag, N is the sample size, z is the cumulative distribution
 function of the standard normal distribution and α is the significance
 level. In this case, the confidence bands increase as the lag increases.
 
-Questions
----------
+## Questions
 The autocorrelation plot can provide answers to the following questions:
 1. Are the data random?
 2. Is an observation related to an adjacent observation?
@@ -96,8 +84,7 @@ The autocorrelation plot can provide answers to the following questions:
 8. Is the model Y = constant + error valid and sufficient?
 9. Is the formula s[Ybar] = s / √N valid?
 
-Importance
-----------
+## Importance
 Ensure validity of engineering conclusions 	
 
 Randomness (along with fixed model, fixed variation, and fixed distribution)
@@ -121,13 +108,6 @@ and invalid.
 In short, if the analyst does not check for randomness, then the validity
 of many of the statistical conclusions becomes suspect. The autocorrelation
 plot is an excellent way of checking for such randomness.
-
-Related Techniques
-------------------
-* Partial Autocorrelation Plot
-* Lag Plot
-* Spectral Plot
-* Seasonal Subseries Plot
 """
 
 
