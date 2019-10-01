@@ -1,10 +1,10 @@
 """
-Source
-------
+BOX-COX NORMALITY PLOT
+
+## Source
 https://www.itl.nist.gov/div898/handbook/eda/section3/boxcox.htm
 
-Purpose
--------
+## Purpose
 Find transformation to normalize data
 Many statistical tests and intervals are based on the assumption of
 normality. The assumption of normality often leads to tests that are
@@ -33,43 +33,25 @@ for various values of the lambda parameter. The value of lambda
 corresponding to the maximum correlation on the plot is then the optimal
 choice for λ.
 
-Sample Plot
------------
-The histogram in the upper left-hand shows a data set that has significant
-right skewness (and so does not follow a normal distribution). The Box-Cox
-normality plot shows that the maximum value of the correlation coefficient
-is at λ = -0.3. The histogram of the data after applying the Box-Cox
-transformation with λ = -0.3 shows a data set for which the normality
-assumption is reasonable. This is verified with a normal probability
-plot of the transformed data.
-
-Definition
-----------
+## Definition
 Box-Cox normality plots are formed by:
 * Vertical axis: Correlation coefficient from the normal probability
 plot after applying Box-Cox transformation
 * Horizontal axis: Value for λ
 
-Questions
----------
+## Questions
 The Box-Cox normality plot can provide answers to the following
 questions:
 1. Is there a transformation that will normalize my data?
 2. What is the optimal value of the transformation parameter?
 
-Importance
-----------
+## Importance
 Normalization improves validity of tests
 
 Normality assumptions are critical for many univariate intervals and
 tests. It is important to test this normality assumption. If the data
 are in fact not normal, the Box-Cox normality plot can often be used to
 find a transformation that will normalize the data.
-
-Related Techniques
-------------------
-* Normal Probability Plot
-* Box-Cox Linearity Plot
 """
 
 
