@@ -240,10 +240,20 @@ def load_tire_speed_effect():
                         delim_whitespace=True)
 
 
+def load_furnace():
+    """Source: NIST Engineering Handbook of Statistical Methods"""
+    url = "https://www.itl.nist.gov/div898/handbook/datasets/FURNACE.DAT"
+    filename = url.split("/")[-1]
+    names = ["RUN", "ZONE", "WAFER", "THICKNESS"]
+
+    return load_dataset(filename, names=names, skiprows=25,
+                        url_to_fetch_if_missing=url,
+                        delim_whitespace=True)
+
 
 # TESTING
 if __name__ == "__main__":
-    df = load_tire_speed_effect()
+    df = load_furnace()
     print(df.info())
     print(df.head())
     print(df.tail())
