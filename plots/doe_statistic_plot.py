@@ -1,5 +1,5 @@
 """
-DOE MEAN PLOT
+DOE MEAN/MEDIAN/STANDARD DEVIATION PLOT
 
 ## Source
 https://www.itl.nist.gov/div898/handbook/eda/section3/dexmeanp.htm
@@ -132,11 +132,125 @@ def doe_statistic_plot(df, response, factors, statistic="mean",
     fig.suptitle(title)
 
     show_and_save_plot(show=show, save=save,
-                       filename="doe_scatter_plot.png")
+                       filename="doe_statistic_plot.png")
 
 
-def doe_statistic_matrix():
-    pass
+def doe_statistic_matrix(df, response, factors, statistic="mean",
+                         y_label=None, title=None,
+                         show_overall_statistic=False,
+                         figure_size=(8, 6), show=True, save=False,
+                         **kwargs):
+
+    df = df.copy()
+    n_factors = len(factors)
+    
+    fig, axes = plt.subplots(nrows=n_factors, ncols=n_factors,
+                             squeeze=False, sharey=True,
+                             figsize=figure_size,
+                             gridspec_kw={"left": 0.1, "right": 0.95,
+                                          "bottom": 0.05, "top": 0.9,
+                                          "wspace": 0, "hspace": 0.3})
+
+    if statistic == "mean":
+        overall_statistic = df[response].mean()
+    elif statistic == "median":
+        overall_statistic = df[response].median()
+    elif statistic == "std":
+        overall_statistic = df[response].std()
+    else:
+        raise ValueError("*statistic* should be 'mean', 'median', or 'std'.")    
+
+    for pair in product(range(n_factors), range(n_factors)):
+        row, col = pair
+        ax = axes[row, col]
+        
+        if row > col: # Skip the cell
+            ax.axis("off")
+        
+        elif row == col: # Single-factor scatter plot
+            if show_overall_statistic:
+                ax.axhline(y=overall_statistic)
+            
+            factor = factors[row]
+            factor_levels = np.sort(df[factor].unique())
+
+            def encode(level):
+                return factor_levels.searchsorted(level)
+
+            encoded_factors = [encode(x) for x in factor_levels]
+
+            stat_by_level = []
+            for level in factor_levels:
+                if statistic == "mean":
+                    stat_by_level.append(
+                        df[df[factor]==level][response].mean())
+                elif statistic == "median":
+                    stat_by_level.append(
+                        df[df[factor]==level][response].median())
+                elif statistic == "std":
+                    stat_by_level.append(
+                        df[df[factor]==level][response].std())
+                else:
+                    raise ValueError(
+                    "*statistic* should be 'mean', 'median', or 'std'.")
+                                      
+            ax.plot(encoded_factors, stat_by_level, **kwargs)
+            ax.annotate(factor, xy=(0.5, 1.02), xycoords="axes fraction",
+                        horizontalalignment="center")
+            ax.set_xticks(list(range(len(factor_levels))))
+            ax.set_xticklabels(factor_levels)
+            ax.set_xlim(-0.5, len(factor_levels)-0.5)
+
+        else: # Double-factor scatter plot
+            if show_overall_statistic:
+                ax.axhline(y=overall_statistic)
+                
+            factor_1 = factors[row]
+            factor_2 = factors[col]
+
+            try:
+                combined_factor = df[factor_1] * df[factor_2]
+                df["combined"] = combined_factor
+                factor_levels = np.sort(combined_factor.unique())
+
+                def encode(level):
+                    return factor_levels.searchsorted(level)
+                
+                encoded_factors = [encode(x) for x in factor_levels]
+
+                stat_by_level = []
+                for level in factor_levels:
+                    if statistic == "mean":
+                        stat_by_level.append(
+                            df[df["combined"]==level][response].mean())
+                    elif statistic == "median":
+                        stat_by_level.append(
+                            df[df["combined"]==level][response].median())
+                    elif statistic == "std":
+                        stat_by_level.append(
+                            df[df["combined"]==level][response].std())
+                    else:
+                        raise ValueError(
+                        "*statistic* should be 'mean', 'median', or 'std'.")
+
+                ax.plot(encoded_factors, stat_by_level, **kwargs)
+                ax.annotate("{}*{}".format(factor_1, factor_2),
+                            xy=(0.5, 1.02), xycoords="axes fraction",
+                            horizontalalignment="center")
+                ax.set_xticks(list(range(len(factor_levels))))
+                ax.set_xticklabels(factor_levels)
+                ax.set_xlim(-0.5, len(factor_levels)-0.5)
+                
+            except TypeError:
+                raise TypeError("Factor levels should be encoded as integers.")
+
+    if y_label is None:
+        y_label = statistic.title() + " of Response"
+        
+    axes[0, 0].set_ylabel(y_label)
+    fig.suptitle(title)
+    show_and_save_plot(show=show, save=save,
+                       filename="doe_statistic_matrix.png")
 
 
 def test_doe_statistic_plot():
@@ -148,7 +262,10 @@ def test_doe_statistic_plot():
 
 
 def test_doe_statistic_matrix():
-    pass
+    df = datasets.load_tire_speed_effect()
+    doe_statistic_matrix(df, "Y", ["X1", "X2"], statistic="mean",
+                         show_overall_statistic=True, marker="*",
+                         color="k")
 
 
 if __name__ == "__main__":
