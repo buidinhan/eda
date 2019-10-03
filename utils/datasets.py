@@ -251,9 +251,20 @@ def load_furnace():
                         delim_whitespace=True)
 
 
+def load_screw_machine():
+    """Source: NIST Engineering Handbook of Statistical Methods"""
+    url = "https://www.itl.nist.gov/div898/handbook/datasets/MACHINE.DAT"
+    filename = url.split("/")[-1]
+    names = ["MACHINE", "DAY", "TIME", "SAMPLE", "DIAMETER"]
+
+    return load_dataset(filename, names=names, skiprows=25,
+                        url_to_fetch_if_missing=url,
+                        delim_whitespace=True)
+
+
 # TESTING
 if __name__ == "__main__":
-    df = load_furnace()
+    df = load_screw_machine()
     print(df.info())
     print(df.head())
     print(df.tail())
